@@ -1,28 +1,40 @@
-import 'package:flutter/material.dart';
-import 'package:actors_app/src/pages/home_page.dart';
-import 'package:actors_app/src/pages/actor_detalle.dart';
-import 'package:actors_app/src/models/actores_model.dart';
+// ignore_for_file: deprecated_member_use
 
-void main() => runApp(MyApp());
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:actors_app/screens/main.dart';
+
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF242A32),
+      ),
+    );
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Actores TMDB',
-      initialRoute: '/',
-      routes: {
-        '/': (BuildContext context) => HomePage(),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == 'detalle') {
-          final Actor actor = settings.arguments as Actor;
-          return MaterialPageRoute(
-            builder: (context) => ActorDetalle(actor: actor),
-          );
-        }
-      },
+      theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xFF242A32),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Poppins',
+          ),
+          bodyText2: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Poppins',
+          ),
+        ),
+      ),
+      home: Main(),
     );
   }
 }
